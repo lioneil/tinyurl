@@ -41,8 +41,16 @@ trait HasSearch
         }
 
         return $query->where(function ($builder) use ($search) {
-            foreach ($this->searchableColumns as $column) {
-                $builder->orWhere($column, 'like', "%{$search}%");
+            if (str_contains($search, "\"")) {
+                // Case-sensitive search
+                foreach ($this->searchableColumns as $column) {
+                    $builder->orWhere($column, trim($search, '"'));
+                }
+            } else {
+                // Case-insensitive search
+                foreach ($this->searchableColumns as $column) {
+                    $builder->orWhere($column, 'like', "%{$search}%");
+                }
             }
         });
     }
