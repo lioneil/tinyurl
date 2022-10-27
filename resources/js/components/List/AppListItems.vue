@@ -38,6 +38,7 @@ async function init () {
 
   item.setItems(data.data);
   item.setPagination(data.meta);
+  item.incrementPage();
 
   $emitter.on('enter:search', (query) => {
     search(query);
@@ -61,17 +62,19 @@ function list () {
 const onScrollReachedEnd = debounce(async function ($state) {
   try {
     const { data } = await list();
-    item.setPagination(data.meta);
 
     if (item.isLastPage()) {
       $state.complete();
     } else {
       item.addItems(data.data);
-      item.incrementPage();
+      item.setPagination(data.meta);
       $state.loaded();
     }
+    item.incrementPage();
     console.log('Scrolled');
     console.table({ ...item.pagination, lastPage: item.isLastPage() });
+    console.log('Scrolled');
+    console.log(item.params, data.meta);
   } catch (err) {
     $state.error();
     console.error(err);
