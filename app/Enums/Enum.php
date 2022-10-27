@@ -29,4 +29,17 @@ abstract class Enum
 
         return array_values($class->getConstants());
     }
+
+    /**
+     * Retrieve key from a given value.
+     *
+     * @param string $value
+     * @return string|null
+     */
+    static function getKeyFromValue ($value)
+    {
+        $class = new ReflectionClass(get_called_class());
+        $constants = $class->getConstants();
+        return array_search($value, $constants) ?? null;
+    }
 }
