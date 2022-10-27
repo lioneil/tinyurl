@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Destination::factory(500)->create();
+        $destinations = Destination::factory(500)->create();
+        $destinations->random(100)->each(fn($destination) => $destination->delete());
     }
 }

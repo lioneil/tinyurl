@@ -7,10 +7,11 @@ use App\Models\Traits\HasSearch;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Destination extends Model
 {
-    use HasFactory, HasSearch;
+    use HasFactory, HasSearch, SoftDeletes;
 
     /**
      * Searchable columns.
