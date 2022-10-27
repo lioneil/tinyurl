@@ -29,7 +29,8 @@ const items = {
   },
   setSearch (query) {
     this.params.q = query;
-    this.updateURLParams();
+    this.params.page = 1;
+    // this.updateURLParams();
   },
   getParamsAsString () {
     return queryString.stringify(this.params);
@@ -51,6 +52,8 @@ const items = {
   },
   incrementPage () {
     this.pagination.page += 1;
+    this.params.page += 1;
+    console.log('incrementPage', this.pagination);
   },
 };
 
