@@ -11,7 +11,7 @@ trait HasSearch
      *
      * @var array
      */
-    public $unsearchableColumns = ['id', 'updated_at', 'created_at'];
+    public $unsearchableColumns = ['id', 'updated_at', 'created_at', 'deleted_at'];
 
     /**
      * Cleanup columns and remove unsearchable fields.
