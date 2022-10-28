@@ -26,7 +26,10 @@ class DestinationService extends Service
     {
         Cache::forget("destinations/q{$this->params->q}");
         return Cache::remember("destinations/q{$this->params->q}", config('cache.seconds', 172800), function () {
-            $query = $this->model()->activeOnly()->search($this->params->q);
+            $query = $this->model()->with('tags')
+                ->activeOnly()
+                ->search($this->params->q)
+                ->orSearch($this->params->q, 'tags', ['name']);
 
             $perPage = $this->params->per_page;
             $currentPage = $this->params->page;
