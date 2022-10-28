@@ -24,7 +24,6 @@ class DestinationService extends Service
      */
     public function list ()
     {
-        Cache::forget("destinations/q{$this->params->q}");
         return Cache::remember("destinations/q{$this->params->q}", config('cache.seconds', 172800), function () {
             $query = $this->model()->with('tags')
                 ->activeOnly()
