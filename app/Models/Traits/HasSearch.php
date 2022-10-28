@@ -84,6 +84,7 @@ trait HasSearch
      * @param \Illuminate\Database\Eloquent\Builder $builder
      * @param string $search
      * @param array $columns
+     * @param bool $strict    Whether to perform an 'AND' or 'OR'
      * @return void
      */
     function performSearch (Builder $builder, $search, $columns = [], $strict = false)
