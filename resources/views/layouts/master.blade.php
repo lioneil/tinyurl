@@ -1,9 +1,7 @@
 @include('partials.head')
 
 <div id="app">
-  <div class="container mx-auto px-4">
-    @yield('main')
-  </div>
+  @yield('main')
 </div>
 
 @include('partials.foot')
