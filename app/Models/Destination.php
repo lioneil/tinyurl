@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\DestinationStatus;
+use App\Models\Tag;
 use App\Models\Traits\HasSearch;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,7 +21,6 @@ class Destination extends Model
      */
     public $searchableColumns = ['url', 'alias'];
 
-
     /**
      * Scope a query to search through columns.
      *
@@ -30,5 +30,15 @@ class Destination extends Model
     function scopeActiveOnly (Builder $query)
     {
         return $query->where('status', DestinationStatus::ACTIVE);
+    }
+
+    /**
+     * Get the tags that belongs to the destination.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    function tags ()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }
