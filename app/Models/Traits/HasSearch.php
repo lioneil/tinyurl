@@ -89,7 +89,8 @@ trait HasSearch
     function performSearch (Builder $builder, $search, $columns = [], $strict = false)
     {
         $columns = empty($columns) ? $this->searchableColumns : $columns;
-        if (str_contains($search, "\"")) {
+
+        if (str_contains($search, '"')) {
             // Case-sensitive search
             foreach ($columns as $column) {
                 $builder->orWhere($column, trim($search, '"'));
