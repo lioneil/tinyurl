@@ -94,7 +94,12 @@ trait HasSearch
         if (str_contains($search, '"')) {
             // Case-sensitive search
             foreach ($columns as $column) {
-                $builder->orWhere($column, trim($search, '"'));
+                if ($strict) {
+                    $builder->where($column, trim($search, '"'));
+                } else {
+                    $builder->orWhere($column, trim($search, '"'));
+                }
+                // $builder->orWhere($column, trim($search, '"'));
             }
         } else {
             // Case-insensitive search
